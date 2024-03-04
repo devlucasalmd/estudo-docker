@@ -1,0 +1,31 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microserviço</title>
+</head>
+<body>
+    <h1>Enviar Nome</h1>
+    <input type="text" id="nomeInput">
+    <button onclick="enviarNome()">Enviar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        async function enviarNome() {
+            const nome = document.getElementById('nomeInput').value;
+            const response = await fetch('/hello', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nome })
+            });
+            const data = await response.text();
+            document.getElementById('resultado').innerText = data;
+        }
+    </script>
+</body>
+</html>
